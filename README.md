@@ -1,6 +1,10 @@
 # README Template and Ruby and Ruby on Rails Environment Configuration
 # **Ruby version: 0.0.0**
 
+# Dependencies
+---
+In order to generate an ERD quickly, you can use the ruby gem [rails-erd](https://github.com/voormedia/rails-erd)
+
 # Initial Environment Configuration
 
 ### Installing Ruby
