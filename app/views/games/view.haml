@@ -1,0 +1,29 @@
+-# %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
+-# %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+-# %link{:href => "hex_grid.css", :rel => "stylesheet", :type => "text/css"}/
+.row
+  .col-md-2
+    %form.form-horizontal{:onsubmit => "return false;"}
+      %div{:style => "border: 1px solid black"}
+        .control-group
+          %label.control-label Rows
+          .controls
+            %input#rows.input{:placeholder => "Rows", :value => "5"}/
+        .control-group
+          %label.control-label Columns
+          .controls
+            %input#columns.input{:placeholder => "Columns", :value => "10"}/
+        .control-group
+          %label.control-label Radius
+          .controls
+            %input#radius.input{:placeholder => "Radius", :value => "20"}/
+        .control-group
+          .controls
+            %button#rebuild.btn Rebuild
+.row
+  .span6{:style => "text-align:center"}
+    #container
+    %h2
+      %small#logger click around the grid
+  .span6
+-# %script{:src => "hexgridwidget.js"}

@@ -1,0 +1,30 @@
+// not sure why this is here, potentially vestigal
+svg {
+}
+
+.hexfield {
+  fill: transparent;
+  stroke: yellowgreen;
+  stroke-width: 1;
+}
+
+.hexfield:focus {
+  outline:none;
+}
+
+.hexfield:hover {
+  fill: green;
+}
+
+.hexfield:active {
+  fill: red;
+  outline: none;
+}
+
+.hexfield.clicked {
+  fill: yellow;
+}
+
+.hexfield.zoc {
+  fill: red;
+}
