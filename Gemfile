@@ -1,58 +1,30 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.5.5'
 
-# server
-gem 'rails', '~> 5.2.1'
-gem 'mysql2'
+gem 'rails', '~> 5.2.3'
+gem 'sqlite3'
 gem 'puma', '~> 3.11'
-
-# js / css
-gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
-
-# haml
-gem 'haml'
-gem 'haml-rails'
-
-# misc
-gem 'pry'
-gem 'factory_bot_rails'
-gem 'faker'
-gem 'active_model_serializers', '~> 0.10.2'
-
-# look up and learn what they do
-gem 'turbolinks', '~> 5'
+gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 
-# might need soon
-## gem 'jquery-ui-rails'
-## gem 'cocoon'
-## gem 'devise'
-## gem 'cancancan'
+gem 'haml'
+gem 'kaminari'
+gem 'jquery-rails'
+gem 'bootstrap'
 
 group :development, :test do
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'pry-rails'
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-
-  gem 'byebug'
-  gem 'pry-rails'
-  gem 'pry-byebug'
-  gem 'rails-erd'
 end
 
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
-end
-
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
