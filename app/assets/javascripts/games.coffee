@@ -54,62 +54,36 @@ $(document).ready ->
       return
 
   evenColumnZoc = (selected_row, selected_column) ->
-    hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + parseInt(selected_column) + '\']'
-    hex = $(hex_selector)[0]
-    hex.classList.toggle 'clicked'
-    # above hex
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) - 1) + '\'][hex-column=\'' + parseInt(selected_column) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # hex to the right and up
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) - 1) + '\'][hex-column=\'' + (parseInt(selected_column) + 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # // hex to the right and down
-    next_hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + (parseInt(selected_column) + 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # // hex below
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) + 1)+ '\'][hex-column=\'' + parseInt(selected_column) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # // hex to the left and down
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) - 1) + '\'][hex-column=\'' + (parseInt(selected_column) - 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # // hex to the left and down
-    next_hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + (parseInt(selected_column) - 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
+    toggleClicked(selected_row, selected_column)
+    toggleZoc(selected_row, selected_column, -1)
+    toggleZoc(selected_row, selected_column, -1, 1)
+    toggleZoc(selected_row, selected_column, 0, 1)
+    toggleZoc(selected_row, selected_column, 1)
+    toggleZoc(selected_row, selected_column, -1, -1)
+    toggleZoc(selected_row, selected_column, 0, -1)
     return
 
   oddColumnZoc = (selected_row, selected_column) ->
+    toggleClicked(selected_row, selected_column)
+    toggleZoc(selected_row, selected_column, -1)
+    toggleZoc(selected_row, selected_column, 1, 1)
+    toggleZoc(selected_row, selected_column, 0, 1)
+    toggleZoc(selected_row, selected_column, 1)
+    toggleZoc(selected_row, selected_column, 1, -1)
+    toggleZoc(selected_row,selected_column, 0, -1)
+    return
+
+  toggleClicked = (selected_row, selected_column) ->
     hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + parseInt(selected_column) + '\']'
     hex = $(hex_selector)[0]
     hex.classList.toggle 'clicked'
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) - 1) + '\'][hex-column=\'' + parseInt(selected_column) + '\']'
+    return
+
+  toggleZoc = (selected_row, selected_column, row_adjust=0, column_adjust=0) ->
+    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) + row_adjust) + '\'][hex-column=\'' + (parseInt(selected_column) + column_adjust) + '\']'
     next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # hex to the right and up
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) + 1) + '\'][hex-column=\'' + (parseInt(selected_column) + 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # hex to the right and down
-    next_hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + (parseInt(selected_column) + 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # hex below
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) + 1) + '\'][hex-column=\'' + parseInt(selected_column) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # hex to the left and down
-    next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) + 1) + '\'][hex-column=\'' + (parseInt(selected_column) - 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
-    # hex to the left and down
-    next_hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + (parseInt(selected_column) - 1) + '\']'
-    next_hex = $(next_hex_selector)[0]
-    next_hex.classList.toggle 'zoc'
+    if next_hex?
+      next_hex.classList.toggle 'zoc'
     return
 
   rebuild = ->
