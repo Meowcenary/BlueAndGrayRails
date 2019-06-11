@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'games#view'
+  # games routes
+  root to: 'games#index'
+  get 'games/:id', to: 'games#view'
+
+  # scenarios routes
+  get 'games/:id/scenarios', to: 'scenarios#index'
+  get 'games/:id/scenarios/:id', to: 'scenarios#view'
+
+  # battles routes
+  get 'games/:id/scenarios/:id/battles', to: 'battles#index'
+  get 'games/:id/scenarios/:id/battles/:id', to: 'battles#view'
 end
