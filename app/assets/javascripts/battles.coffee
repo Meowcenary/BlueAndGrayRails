@@ -86,6 +86,11 @@ $(document).ready ->
       next_hex.classList.toggle 'zoc'
     return
 
+  clearHexfield = () ->
+    $('.zoc').removeClass('zoc')
+    $('.clicked').removeClass('clicked')
+    return
+
   rebuild = ->
     radius = parseInt($('#radius').val())
     columns = parseInt($('#columns').val())
@@ -98,7 +103,7 @@ $(document).ready ->
       return
 
     $('#container .hexfield').click ->
-      rebuild()
+      clearHexfield()
       hex = $(this)
       selected_column = hex.attr('hex-column')
       selected_row = hex.attr('hex-row')
