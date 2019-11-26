@@ -3,8 +3,10 @@ $(document).ready ->
 
   hexGrid = (container_element, radius, columns, rows, cssClass) ->
 
-    # called throughout, will actually create the polygon element in the DOM
+    # creates the polygon element in the DOM
     createSVG = (tag) ->
+      # https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS
+      # SVG Documentation: https://www.w3.org/TR/SVG/
       $ document.createElementNS('http://www.w3.org/2000/svg', tag or 'svg')
 
     $(container_element).each ->
@@ -17,6 +19,7 @@ $(document).ready ->
 
       height = Math.sqrt(3) / 2 * radius
       svgParent = createSVG('svg').attr('tabindex', 1).appendTo(element).css(
+        # to make sure the svg is large enough to show all the hexes
         width: (1.5 * columns + 0.5) * radius
         height: (2 * rows + 1) * height)
       column = undefined
@@ -54,36 +57,34 @@ $(document).ready ->
       return
 
   evenColumnZoc = (selected_row, selected_column) ->
-    toggleClicked(selected_row, selected_column)
-    toggleZoc(selected_row, selected_column, -1)
-    toggleZoc(selected_row, selected_column, -1, 1)
-    toggleZoc(selected_row, selected_column, 0, 1)
-    toggleZoc(selected_row, selected_column, 1)
     toggleZoc(selected_row, selected_column, -1, -1)
-    toggleZoc(selected_row, selected_column, 0, -1)
+    toggleZoc(selected_row, selected_column, -1, 1)
     return
 
   oddColumnZoc = (selected_row, selected_column) ->
+    toggleZoc(selected_row, selected_column, 1, -1)
+    toggleZoc(selected_row, selected_column, 1, 1)
+    return
+
+  # toggle hexes that surround both even and odd columns
+  commonZoc = (selected_row, selected_column) ->
     toggleClicked(selected_row, selected_column)
     toggleZoc(selected_row, selected_column, -1)
-    toggleZoc(selected_row, selected_column, 1, 1)
+    toggleZoc(selected_row,selected_column, 0, -1)
     toggleZoc(selected_row, selected_column, 0, 1)
     toggleZoc(selected_row, selected_column, 1)
-    toggleZoc(selected_row, selected_column, 1, -1)
-    toggleZoc(selected_row,selected_column, 0, -1)
-    return
 
   toggleClicked = (selected_row, selected_column) ->
     hex_selector = '#container .hexfield[hex-row=\'' + parseInt(selected_row) + '\'][hex-column=\'' + parseInt(selected_column) + '\']'
     hex = $(hex_selector)[0]
-    hex.classList.toggle 'clicked'
+    hex.classList.toggle('clicked')
     return
 
   toggleZoc = (selected_row, selected_column, row_adjust=0, column_adjust=0) ->
     next_hex_selector = '#container .hexfield[hex-row=\'' + (parseInt(selected_row) + row_adjust) + '\'][hex-column=\'' + (parseInt(selected_column) + column_adjust) + '\']'
     next_hex = $(next_hex_selector)[0]
     if next_hex?
-      next_hex.classList.toggle 'zoc'
+      next_hex.classList.toggle('zoc')
     return
 
   clearHexfield = () ->
@@ -107,10 +108,11 @@ $(document).ready ->
       hex = $(this)
       selected_column = hex.attr('hex-column')
       selected_row = hex.attr('hex-row')
+      commonZoc(selected_row, selected_column)
       if selected_column % 2 == 1
-        oddColumnZoc selected_row, selected_column
+        oddColumnZoc(selected_row, selected_column)
       else
-        evenColumnZoc selected_row, selected_column
+        evenColumnZoc(selected_row, selected_column)
       return
     return
 
