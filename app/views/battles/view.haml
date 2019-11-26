@@ -5,11 +5,11 @@
         .control-group
           %label.control-label Rows
           .controls
-            %input#rows.input{:placeholder => "Rows", :value => "5"}/
+            %input#rows.input{:placeholder => "Rows", :value => "50"}/
         .control-group
           %label.control-label Columns
           .controls
-            %input#columns.input{:placeholder => "Columns", :value => "10"}/
+            %input#columns.input{:placeholder => "Columns", :value => "100"}/
         .control-group
           %label.control-label Radius
           .controls
@@ -17,8 +17,8 @@
         .control-group
           .controls
             %button#rebuild.btn Rebuild
-            =link_to games_submit_turn_path(params: {test_param: 'test'}), title: 'Submit Turn', method: :post do
-              %button Submit Turn
+            -# =link_to games_submit_turn_path(params: {test_param: 'test'}), title: 'Submit Turn', method: :post do
+            -#   %button Submit Turn
 .row
   .span6{:style => "text-align:center"}
     #container
